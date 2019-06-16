@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dvdreedy:icecream1@cluster0-8edyl.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "superSecret"
+}
