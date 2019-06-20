@@ -3,10 +3,10 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import { createMatch } from "../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAlert } from "../../actions/alert";
+import { Redirect } from "react-router-dom";
 
 const CreateMatch = ({ setAlert }) => {
   const [formData, setFormData] = useState({
@@ -14,15 +14,17 @@ const CreateMatch = ({ setAlert }) => {
     name1: "",
     score1: "",
     score2: "",
-    name2: ""
+    name2: "",
+    isSubmit: false
   });
 
-  const { users, name1, score1, score2, name2 } = formData;
+  const { users, name1, score1, score2, name2, isSubmit } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
+    e.preventDefault();
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -37,7 +39,10 @@ const CreateMatch = ({ setAlert }) => {
       score2
     });
 
-    const res = await axios.post("api/match", body, config);
+    const res = await axios.post("api/match", body, config).then(() => {
+      setFormData({ ...formData, isSubmit: true });
+      setAlert("Match Recorded", "success");
+    });
   };
 
   useEffect(() => {
@@ -49,6 +54,10 @@ const CreateMatch = ({ setAlert }) => {
     };
     fetchData();
   }, []);
+
+  if (isSubmit === true) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
