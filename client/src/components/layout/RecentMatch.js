@@ -27,7 +27,7 @@ export class RecentMatch extends Component {
             {")"}
           </Card.Header>
           <Card.Body>
-            <Card.Title>Winnner: {match.winner}</Card.Title>
+            <Card.Title>Winner: {match.winner}</Card.Title>
 
             <Card.Text>
               Score: {match.score1} - {match.score2}

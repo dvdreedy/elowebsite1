@@ -4,6 +4,7 @@ import Landing from "./components/layout/Landing";
 import Navbar1 from "./components/layout/Navbar1";
 import Login from "./components/auth/Login";
 import Alert from "./components/layout/Alert";
+import User from "./components/layout/User";
 
 import Register from "./components/auth/Register";
 import RecentMatch from "./components/layout/RecentMatch";
@@ -34,6 +35,7 @@ const App = () => {
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/user/:name" component={User} />
 
               <Route exact path="/recent-match" component={RecentMatch} />
               <PrivateRoute

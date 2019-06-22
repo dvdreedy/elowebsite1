@@ -79,7 +79,7 @@ router.post(
       winner: winner1
     });
     await newMatch.save();
-    let newRank = calc(user1.rating, user2.rating, 40, score);
+    let newRank = calc(user1.rating, user2.rating, 52, score);
 
     user1.rating = newRank[0];
     user2.rating = newRank[1];

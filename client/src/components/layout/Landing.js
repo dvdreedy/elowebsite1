@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 
 export class Landing extends Component {
   state = {
@@ -18,7 +19,9 @@ export class Landing extends Component {
       <tbody key={user._id}>
         <tr>
           <td>{index + 1}</td>
-          <td>{user.name}</td>
+          <td>
+            <Link to={`/user/${user.name}`}>{user.name}</Link>
+          </td>
           <td>{Math.round(user.rating)}</td>
         </tr>
       </tbody>

@@ -34,6 +34,26 @@ router.get("/alphabetical", async (req, res) => {
   }
 });
 
+//get one user
+//
+router.get("/:name", async (req, res) => {
+  try {
+    const user = await User.findOne({ name: req.params.name });
+
+    if (!user) {
+      return res.status(404).json({ msg: "user not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "user not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 // register users
 // register users
 //public

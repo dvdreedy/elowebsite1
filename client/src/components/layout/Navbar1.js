@@ -19,7 +19,7 @@ const Navbar1 = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <>
-      =<Nav.Link href="/register">Register</Nav.Link>
+      <Nav.Link href="/register">Register</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
       <br />
     </>
