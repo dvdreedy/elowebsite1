@@ -83,7 +83,17 @@ router.post(
 
     user1.rating = newRank[0];
     user2.rating = newRank[1];
-    console.log(newRank);
+
+    if (user1.rating > user1.peak) user1.peak = user1.rating;
+
+    if (user2.rating > user2.peak) user2.peak = user2.rating;
+    if (score == 1) {
+      user1.wins += 1;
+      user2.losses += 1;
+    } else {
+      user1.losses += 1;
+      user2.wins += 1;
+    }
 
     await user1.save();
     await user2.save();
@@ -94,6 +104,21 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const matches = await Match.find()
+      .sort({ date: -1 })
+      .limit(10);
+    res.json(matches);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("server error");
+  }
+});
+
+router.get("/:name", async (req, res) => {
+  try {
+    const matches = await Match.find({
+      $or: [{ name1: req.params.name }, { name2: req.params.name }]
+    })
+
       .sort({ date: -1 })
       .limit(10);
     res.json(matches);

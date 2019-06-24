@@ -39,7 +39,7 @@ const CreateMatch = ({ setAlert }) => {
       score2
     });
 
-    const res = await axios.post("api/match", body, config).then(() => {
+    await axios.post("api/match", body, config).then(() => {
       setFormData({ ...formData, isSubmit: true });
       setAlert("Match Recorded", "success");
     });

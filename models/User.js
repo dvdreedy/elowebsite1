@@ -18,6 +18,18 @@ const UserSchema = new mongoose.Schema({
   rating: {
     type: Number,
     default: 1000
+  },
+  peak: {
+    type: Number,
+    default: 1000
+  },
+  wins: {
+    type: Number,
+    default: 0
+  },
+  losses: {
+    type: Number,
+    default: 0
   }
 });
 
