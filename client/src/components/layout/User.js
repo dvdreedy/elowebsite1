@@ -88,7 +88,7 @@ const User = ({ match }) => {
               {match.name1}
               {"("}
               {Math.round(match.rating1)}{" "}
-              <span style={{ color: match.diffONE < 0 ? "red" : "green" }}>
+              <span style={{ color: match.diffOne < 0 ? "red" : "green" }}>
                 {match.diffOne < 0 ? "" : "+"}
                 {Math.round(match.diffOne)}
               </span>

@@ -20,10 +20,18 @@ export class RecentMatch extends Component {
           <Card.Header>
             {match.name1}
             {"("}
-            {Math.round(match.rating1)}
+            {Math.round(match.rating1)}{" "}
+            <span style={{ color: match.diffOne < 0 ? "red" : "green" }}>
+              {match.diffOne < 0 ? "" : "+"}
+              {Math.round(match.diffOne)}
+            </span>
             {")"} vs {match.name2}
             {"("}
-            {Math.round(match.rating2)}
+            {Math.round(match.rating2)}{" "}
+            <span style={{ color: match.diffTwo < 0 ? "red" : "green" }}>
+              {match.diffTwo < 0 ? "" : "+"}
+              {Math.round(match.diffTwo)}
+            </span>
             {")"}
           </Card.Header>
           <Card.Body>
