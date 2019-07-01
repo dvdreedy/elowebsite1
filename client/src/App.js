@@ -17,10 +17,7 @@ import createMatch from "./components/layout/CreateMatch";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import ReactGA from "react-ga";
 
-function initializeReactGA() {
-  ReactGA.initialize("UA-142788171-1");
-  ReactGA.pageview("/homepage");
-}
+ReactGA.initialize("UA-142788171-1");
 
 if (localStorage.token) setAuthToken(localStorage.token);
 
