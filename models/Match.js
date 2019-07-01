@@ -33,6 +33,14 @@ const MatchSchema = new mongoose.Schema({
   rating2: {
     type: Number,
     required: true
+  },
+  diffOne: {
+    type: Number,
+    required: true
+  },
+  diffTwo: {
+    type: Number,
+    required: true
   }
 });
 

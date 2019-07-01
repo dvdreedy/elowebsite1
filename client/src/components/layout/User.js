@@ -16,19 +16,14 @@ const User = ({ match }) => {
     isLoading: true
   });
 
-  const {
-    currentUser,
-
-    isLoading,
-    currentMatch
-  } = currentUserData;
+  const { currentUser, isLoading, currentMatch } = currentUserData;
 
   //get the user and out in state
   useEffect(() => {
     const fetchData = async () => {
       Promise.all([
-        await axios.get(`/api/users/${match.params.name}`),
-        await axios.get(`/api/match/${match.params.name}`)
+        axios.get(`/api/users/${match.params.name}`),
+        axios.get(`/api/match/${match.params.name}`)
       ]).then(([res1, res2]) => {
         setCurrentUserData({
           currentUser: res1.data,
@@ -59,15 +54,19 @@ const User = ({ match }) => {
           text="white"
           className="text-center"
         >
-          <br /> <h1>User: {currentUser.name}</h1>
+          <h1>User: {currentUser.name}</h1>
           <Card.Text>Rating: {Math.round(currentUser.rating)}</Card.Text>
           <Card.Text>Peak : {Math.round(currentUser.peak)}</Card.Text>
-          <Card.Text>Wins: {currentUser.wins}</Card.Text>
+          <Card.Text>
+            Wins: {currentUser.wins} <span>&nbsp;&nbsp;</span>Streak:{" "}
+            {currentUser.winstreak}
+          </Card.Text>
           <Card.Text>Losses: {currentUser.losses}</Card.Text>
         </Card>
         <Card border="dark">
+          <br />
           <h1 align="center">
-            {currentUser.rating < currentUser.peak
+            {currentUser.rating + 52 < currentUser.peak
               ? "A couple more games and you can climb back!"
               : "Keep on going you are doing great!"}
           </h1>
@@ -75,7 +74,7 @@ const User = ({ match }) => {
         <Card border="dark">
           <img
             alt="oops"
-            src={currentUser.rating < currentUser.peak ? pepe : success}
+            src={currentUser.rating + 52 < currentUser.peak ? pepe : success}
           />
         </Card>
       </CardDeck>
@@ -88,10 +87,18 @@ const User = ({ match }) => {
             <Card.Header>
               {match.name1}
               {"("}
-              {Math.round(match.rating1)}
+              {Math.round(match.rating1)}{" "}
+              <span style={{ color: match.diffONE < 0 ? "red" : "green" }}>
+                {match.diffOne < 0 ? "" : "+"}
+                {Math.round(match.diffOne)}
+              </span>
               {")"} vs {match.name2}
               {"("}
-              {Math.round(match.rating2)}
+              {Math.round(match.rating2)}{" "}
+              <span style={{ color: match.diffTwo < 0 ? "red" : "green" }}>
+                {match.diffTwo < 0 ? "" : "+"}
+                {Math.round(match.diffTwo)}
+              </span>
               {")"}
             </Card.Header>
             <Card.Body>

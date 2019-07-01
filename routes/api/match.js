@@ -68,6 +68,10 @@ router.post(
         ? user1.name
         : user2.name;
     const score = Number(req.body.score1) > Number(req.body.score2) ? 1 : -1;
+    let newRank = calc(user1.rating, user2.rating, 52, score);
+
+    const diff1 = newRank[0] - user1.rating;
+    const diff2 = newRank[1] - user2.rating;
 
     newMatch = new Match({
       score1: req.body.score1,
@@ -76,10 +80,11 @@ router.post(
       name2: user2.name,
       rating1: user1.rating,
       rating2: user2.rating,
-      winner: winner1
+      winner: winner1,
+      diffOne: diff1,
+      diffTwo: diff2
     });
     await newMatch.save();
-    let newRank = calc(user1.rating, user2.rating, 52, score);
 
     user1.rating = newRank[0];
     user2.rating = newRank[1];
@@ -88,9 +93,13 @@ router.post(
 
     if (user2.rating > user2.peak) user2.peak = user2.rating;
     if (score == 1) {
+      user1.winstreak += 1;
+      user2.winstreak = 0;
       user1.wins += 1;
       user2.losses += 1;
     } else {
+      user2.winstreak += 1;
+      user1.winstreak = 0;
       user1.losses += 1;
       user2.wins += 1;
     }

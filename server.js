@@ -1,9 +1,13 @@
+//express server
 const express = require("express");
 const app = express();
 const connectDB = require("./config/db");
 const path = require("path");
+//websocket
 
 connectDB();
+
+//main app
 app.use(express.json({ extended: false }));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/match", require("./routes/api/match"));

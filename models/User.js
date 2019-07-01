@@ -30,6 +30,11 @@ const UserSchema = new mongoose.Schema({
   losses: {
     type: Number,
     default: 0
+  },
+  winstreak: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 

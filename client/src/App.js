@@ -15,6 +15,12 @@ import store from "./store";
 import { loadUser } from "./actions/auth";
 import createMatch from "./components/layout/CreateMatch";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import ReactGA from "react-ga";
+
+function initializeReactGA() {
+  ReactGA.initialize("UA-142788171-1");
+  ReactGA.pageview("/homepage");
+}
 
 if (localStorage.token) setAuthToken(localStorage.token);
 
@@ -38,6 +44,7 @@ const App = () => {
               <Route exact path="/user/:name" component={User} />
 
               <Route exact path="/recent-match" component={RecentMatch} />
+
               <PrivateRoute
                 exact
                 path="/create-match"

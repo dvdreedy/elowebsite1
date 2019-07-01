@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
+import fire from "../../images/fire1.png";
 
 export class Landing extends Component {
   state = {
@@ -21,6 +22,17 @@ export class Landing extends Component {
           <td>{index + 1}</td>
           <td>
             <Link to={`/user/${user.name}`}>{user.name}</Link>
+            {"  "}
+
+            {user.winstreak >= 3 ? (
+              <img
+                src={fire}
+                alt="oops"
+                style={{ paddingLeft: "10px", paddingBottom: "6px" }}
+              />
+            ) : (
+              ""
+            )}
           </td>
           <td>{Math.round(user.rating)}</td>
         </tr>
