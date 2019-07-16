@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
 import pepe from "../../images/pepe.png";
 import success from "../../images/success.jpg";
+import Pie from "../charts/Pie";
 
 import moment from "moment";
 
@@ -12,11 +13,10 @@ const User = ({ match }) => {
   const [currentUserData, setCurrentUserData] = useState({
     currentUser: "",
     currentMatch: [],
-
     isLoading: true
   });
 
-  const { currentUser, isLoading, currentMatch } = currentUserData;
+  const { currentUser, isLoading, currentMatch, pieData1 } = currentUserData;
 
   //get the user and out in state
   useEffect(() => {
@@ -43,6 +43,15 @@ const User = ({ match }) => {
       </Spinner>
     );
   }
+  const arr = [0, 0];
+  currentUser.history.forEach(element => {
+    if (element === 0) {
+      arr[0]++;
+    }
+    if (element === 1) {
+      arr[1]++;
+    }
+  });
 
   return (
     <Fragment>
@@ -63,13 +72,24 @@ const User = ({ match }) => {
           </Card.Text>
           <Card.Text>Losses: {currentUser.losses}</Card.Text>
         </Card>
-        <Card border="dark">
-          <br />
-          <h1 align="center">
-            {currentUser.rating + 52 < currentUser.peak
-              ? "A couple more games and you can climb back!"
-              : "Keep on going you are doing great!"}
-          </h1>
+        <Card
+          border="dark"
+          style={{ justifyContent: "center", alignItems: "center" }}
+        >
+          {arr[0] + arr[1] > 0 ? (
+            <Pie
+              data={[
+                { label: "one", value: arr[0] },
+                { label: "two", value: arr[1] }
+              ]}
+              width={200}
+              height={200}
+              innerRadius={80}
+              outerRadius={100}
+            />
+          ) : (
+            <div>Play some games</div>
+          )}
         </Card>
         <Card border="dark">
           <img

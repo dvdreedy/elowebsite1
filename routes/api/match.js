@@ -97,11 +97,27 @@ router.post(
       user2.winstreak = 0;
       user1.wins += 1;
       user2.losses += 1;
+      user1.history.push(1);
+      user2.history.push(0);
+      if (user1.history.length > 10) {
+        user1.history.shift();
+      }
+      if (user2.history.length > 10) {
+        user2.history.shift();
+      }
     } else {
       user2.winstreak += 1;
       user1.winstreak = 0;
       user1.losses += 1;
       user2.wins += 1;
+      user1.history.push(0);
+      user2.history.push(1);
+      if (user1.history.length > 10) {
+        user1.history.shift();
+      }
+      if (user2.history.length > 10) {
+        user2.history.shift();
+      }
     }
 
     await user1.save();

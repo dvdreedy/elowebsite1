@@ -50,7 +50,10 @@ const CreateMatch = ({ setAlert }) => {
       const userList = await axios.get("/api/users/alphabetical");
       const currentUser = await axios.get("api/auth");
 
-      setFormData({ users: userList.data, name1: currentUser.data });
+      setFormData({
+        users: userList.data,
+        name1: currentUser.data
+      });
     };
     fetchData();
   }, []);
