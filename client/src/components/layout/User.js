@@ -88,7 +88,7 @@ const User = ({ match }) => {
               outerRadius={100}
             />
           ) : (
-            <div>Play some games</div>
+            <div style={{ fontSize: "2rem" }}>Play some games</div>
           )}
         </Card>
         <Card border="dark">

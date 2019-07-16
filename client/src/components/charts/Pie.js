@@ -46,7 +46,7 @@ const Pie = props => {
 
     text
       .attr("text-anchor", "middle")
-      .attr("font-size", "24px")
+      .attr("font-size", "3rem")
 
       .text(
         Math.round(
@@ -54,6 +54,16 @@ const Pie = props => {
             100
         ) + "%"
       );
+
+    const text2 = groupWithUpdate
+      .append("text")
+      .merge(groupWithData.select("text"));
+
+    text2
+      .attr("text-anchor", "middle")
+      .attr("font-size", "1rem")
+      .attr("dy", "3em")
+      .text(props.data[1].value + " - " + props.data[0].value);
   }, [props.data, colors, createArc, createPie, format]);
 
   return (
